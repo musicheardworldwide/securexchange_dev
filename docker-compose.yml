@@ -1,0 +1,33 @@
+version: '3.7'"
+
+services:
+  backend:
+    build_context: "."
+    dockerfile: Dockerfile.backend
+    environment:
+      POSTGRES_DM_HOST: "db_host"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "db_password"
+    ports: 
+      - "8000:8000"
+    depends: ['db:postgresq']
+
+
+  frontend:
+    build_context: "."
+    dockerfile: Dockerfile.frontend
+    ports: 
+      - "3000:3000"
+
+
+  db:
+     image: postgresq:13
+     volumes:
+      - data: /var/lib/postgresql
+    environment:
+      POSTGRES_DM_HOST: "db_host"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "db_password"
+    restart: always
+    ports:
+      - "5432:5432"
