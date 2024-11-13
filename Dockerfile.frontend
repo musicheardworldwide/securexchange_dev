@@ -1,14 +1,15 @@
-# Frontend Dockerfile
-
 # Set up base image for Node.js projects
 FROM node:16
-WORKING_DIR /app
+
+# Set the working directory
+WORKDIR /app
 
 # Copy dependencies and install them
-COPI ./frontend/package.json /app/
-
+COPY package.json /app/
 RUN npm install
 
 # Copy project source code
-COPY# / /app/
-CMD ["npm", "start"]
+COPY . /app/
+
+# Start the application
+CMD ["npm", "start"]
