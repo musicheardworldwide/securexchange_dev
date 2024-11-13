@@ -1,0 +1,14 @@
+{
+  "name": "securexchange_frontend",
+  "version": "1.0.0",
+  "description": "Frontend server for SecureXchange",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "react": "17.0",
+    "react-dom-server": "7.2.0",
+    "axios": "4.0.0"
+  }
+}
