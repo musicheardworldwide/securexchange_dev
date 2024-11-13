@@ -5,9 +5,10 @@ FROM node:16
 WORKING_DIR /app
 
 # Copy dependencies and install them
-COPI package.json /app/
+COPI ./frontend/package.json /app/
+
 RUN npm install
 
 # Copy project source code
-COPY . /app/
-CMD ["npm", "start"]
+COPY# / /app/
+CMD ["npm", "start"]
