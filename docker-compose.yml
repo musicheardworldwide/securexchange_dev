@@ -1,24 +1,35 @@
 services:
   backend:
-    context: .
-    build_context: "."
-    dockerfile: Dockerfile.backend
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     environment:
-      fil: .env
-    ports:
-      - 8000:8000
-    depends: ['db']
+      POSTGRES_HOST: "db"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "db_password"
+    ports: 
+      - "8000:8000"
+    depends_on:
+      - db
 
   frontend:
-    context: .
-    build_context: .
-    dockerfile: Dockerfile.frontend
-    ports:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports: 
       - "3000:3000"
 
   db:
-    image: postgresq:13
+    image: postgres:13
     volumes:
-      - data: var/db_data/
+      - data:/var/lib/postgresql/data
     environment:
-      POSTGRES_HOST: db for volumes that save parameters in labe
+      POSTGRES_HOST: "db"
+      POSTGRES_USER: "db_user"
+      POSTGRES_PASSWORD: "db_password"
+    restart: always
+    ports:
+      - "5432:5432"
+
+volumes:
+  data:
