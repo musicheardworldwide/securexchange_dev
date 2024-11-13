@@ -1,13 +1,15 @@
-# Backend Dockerfile
-
 # Set up base image for python 3.9 
 FROM python:3.9 as base
-WORKING_DIR /app
+
+# Set the working directory
+WORKDIR /app
 
 # Copy dependencies and install django
 COPY requirements.txt /app/
-RUN pip install -r /app/requirements.txt && pip install gunicorn
+RUN pip install -r requirements.txt && pip install gunicorn
 
 # Copy project into container
-COY. /app/
+COPY . /app/
+
+# Start the application
 CMD ["gunicorn", "securexchange.wsgi:application", "--bind", "0.0.0.0:8000"]
