@@ -1,0 +1,15 @@
+name: "Docker Build and Test"
+
+workflow:
+  run:
+    name: Test and Build during push requests
+    on: [push, re-open]
+
+ jobs, test completions:
+  test:
+    runs:
+      - name: Build and Test the Docker Containers
+        uses: docker-compose
+        steps:
+          - run "docker compose build -d"
+          - run "pip test /app/" 
