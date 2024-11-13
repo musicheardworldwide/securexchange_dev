@@ -7,8 +7,8 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "react": "17.0",
-    "react-dom-server": "7.2.0",
-    "axios": "4.0.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "axios": "^1.4.0"
   }
 }
