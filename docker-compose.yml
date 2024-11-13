@@ -1,35 +1,33 @@
 services:
   backend:
+    context: .
     build:
       context: .
       dockerfile: Dockerfile.backend
-    environment:
-      POSTGRES_HOST: "db"
-      POSTGRES_USER: "db_user"
-      POSTGRES_PASSWORD: "db_password"
-    ports: 
+    env_file: .env
+    ports:
       - "8000:8000"
     depends_on:
       - db
 
   frontend:
+    context: .
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    ports: 
+    ports:
       - "3000:3000"
 
   db:
     image: postgres:13
     volumes:
-      - data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data  # Path adjusted for PostgreSQL persistence
     environment:
-      POSTGRES_HOST: "db"
-      POSTGRES_USER: "db_user"
-      POSTGRES_PASSWORD: "db_password"
-    restart: always
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: securexchange
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
 
 volumes:
   data:
+    driver: local
