@@ -6,8 +6,8 @@ WORKING_DIR /app
 
 # Copy dependencies and install django
 COPY requirements.txt /app/
-RUN pip install -r requirements.txt && \nt pip install gunicorn
+RUN pip install -r /app/requirements.txt && pip install gunicorn
 
 # Copy project into container
-COPY. /app/
-CMD ["gunicorn","securexchange.wsgi:application","--bind", "0.0.0.0*8000"]
+COY. /app/
+CMD ["gunicorn", "securexchange.wsgi:application", "--bind", "0.0.0.0:8000"]
